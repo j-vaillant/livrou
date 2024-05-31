@@ -20,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <NavigationMenu />
-        <main>{children}</main>
-        <Footer />
+        <div className="w-2/3 m-auto bg-slate-300 h-full">
+          <Header />
+          <NavigationMenu />
+          <main className="p-4">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

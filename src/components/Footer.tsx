@@ -1,5 +1,5 @@
 const Footer = () => {
-  return <footer>Footer</footer>;
+  return <footer className="w-full flex justify-center">Footer</footer>;
 };
 
 export default Footer;
