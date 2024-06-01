@@ -20,10 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="w-2/3 m-auto bg-slate-300 h-full">
-          <Header />
-          <NavigationMenu />
-          <main className="p-4">{children}</main>
+        <div className="w-2/3 m-auto flex flex-col bg-slate-300 h-full">
+          <div className="flex flex-col">
+            <Header />
+            <NavigationMenu />
+          </div>
+          <div className="flex flex-1">
+            <main className="p-4">{children}</main>
+          </div>
           <Footer />
         </div>
       </body>
