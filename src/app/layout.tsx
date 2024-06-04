@@ -25,7 +25,7 @@ export default function RootLayout({
             <Header />
             <NavigationMenu />
           </div>
-          <div className="flex flex-1">
+          <div className="flex flex-1 flex-col">
             <main className="p-4">{children}</main>
           </div>
           <Footer />

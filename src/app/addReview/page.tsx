@@ -1,5 +1,11 @@
+import NewReviewForm from "./NewReviewForm";
+
 const AddReview = () => {
-  return "Ceci est la page de dépot d'une critique";
+  return (
+    <div className="w-full flex">
+      <NewReviewForm />
+    </div>
+  );
 };
 
 export default AddReview;
