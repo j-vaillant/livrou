@@ -2,13 +2,32 @@
 
 import { FC, useEffect, useState } from "react";
 import BookComponent from "./Book";
-import booksJSON from "./books.json";
+
+type BookRequest = {
+  books: Book[];
+};
+
+const fetchBooks = async (): Promise<BookRequest> => {
+  const books = await fetch("/api/books", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return await books.json();
+};
 
 const BookList: FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    setBooks(booksJSON);
+    const fetchData = async () => {
+      const data = await fetchBooks();
+
+      setBooks(data.books);
+    };
+
+    fetchData();
   }, []);
 
   return (
