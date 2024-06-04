@@ -1,3 +1,7 @@
-export default function Home() {
-  return "Ceci est la homepage";
-}
+import BookList from "@/components/books/BookList";
+
+const Home = () => {
+  return <BookList />;
+};
+
+export default Home;
