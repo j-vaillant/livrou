@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
-import books from "./books.json";
+import { createConnection, executeQuery } from "@/utils/mysql";
 
 export async function GET() {
-  return NextResponse.json(
-    {
-      books,
-    },
-    { status: 200 }
+  const connexion = await createConnection();
+
+  connexion.connect();
+
+  const books = await executeQuery<Book[], undefined>(
+    connexion,
+    "select * from books"
   );
+
+  connexion.end();
+
+  return NextResponse.json({ books }, { status: 200 });
 }
