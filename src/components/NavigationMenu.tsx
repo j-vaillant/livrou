@@ -15,6 +15,11 @@ const NavigationMenu = () => {
         </Link>
       </li>
       <li>
+        <Link href="/addBook" className="flex">
+          Déposer un livre
+        </Link>
+      </li>
+      <li>
         <Link href="/login" className="flex">
           <KeyRound className="mr-2" /> Se connecter
         </Link>
