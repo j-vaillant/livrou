@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "@/components/toast/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -17,10 +18,20 @@ const NewReviewForm = () => {
     resolver: zodResolver(NewReviewFormSchema),
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof NewReviewFormSchema>> = (
+  const onSubmit: SubmitHandler<z.infer<typeof NewReviewFormSchema>> = async (
     values
   ) => {
-    console.log(values);
+    const req = await fetch("/api/reviews", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+
+    const data = await req.json();
+
+    toast({ description: data.error ? data.error : data.message });
   };
 
   return (

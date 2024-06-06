@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import NavigationMenu from "@/components/NavigationMenu";
 import Header from "@/components/Header";
+import { Toaster } from "@/components/toast/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           </div>
           <div className="flex flex-1 overflow-y-scroll flex-col">
             <main className="p-4">{children}</main>
+            <Toaster />
           </div>
           <Footer />
         </div>
