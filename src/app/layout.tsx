@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import NavigationMenu from "@/components/NavigationMenu";
 import Header from "@/components/Header";
 import { Toaster } from "@/components/toast/toaster";
-
+import { SessionProvider } from "next-auth/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,17 +21,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="w-2/3 m-auto flex flex-col bg-slate-300 h-full">
-          <div className="flex flex-col">
-            <Header />
-            <NavigationMenu />
+        <SessionProvider>
+          <div className="w-2/3 m-auto text-sm text-md flex flex-col bg-slate-300 h-full">
+            <div className="flex flex-col">
+              <Header />
+              <NavigationMenu />
+            </div>
+            <div className="flex flex-1 overflow-y-scroll flex-col">
+              <main className="p-4">{children}</main>
+              <Toaster />
+            </div>
+            <Footer />
           </div>
-          <div className="flex flex-1 overflow-y-scroll flex-col">
-            <main className="p-4">{children}</main>
-            <Toaster />
-          </div>
-          <Footer />
-        </div>
+        </SessionProvider>
       </body>
     </html>
   );

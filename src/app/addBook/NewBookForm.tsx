@@ -14,8 +14,6 @@ const initialState: FormState = {};
 const NewBookForm: FC = () => {
   const [state, formAction] = useFormState(insertBook, initialState);
 
-  console.log(state);
-
   return (
     <div className="mx-auto w-[400px]">
       <form action={formAction}>

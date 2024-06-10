@@ -1,5 +1,13 @@
-const Login = () => {
-  return "Ceci est la page de login";
+import LoginForm from "./LoginForm";
+
+const getToken = async (): Promise<{ csrfToken: string }> => {
+  const req = await fetch(`${process.env.API_BASE}/api/auth/csrf`);
+  return await req.json();
+};
+
+const Login = async () => {
+  const token = await getToken();
+  return <LoginForm csrfToken={token.csrfToken} />;
 };
 
 export default Login;
