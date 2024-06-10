@@ -12,7 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const password = c.password as string;
         const res = await executeQuery<User[], string[]>(
           connection,
-          "SELECT * from users WHERE login = ? AND password = ?",
+          "SELECT * from Users WHERE login = ? AND password = ?",
           [login, password]
         );
 
@@ -24,6 +24,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  secret: "UPO4cnmmWXPiMWac0Pv/yQqf2fPVm/nPWTWDtgEl0bc=",
   pages: {
     signIn: "/login",
   },

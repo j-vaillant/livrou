@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   try {
     await executeQuery<Book[], { text: string }>(
       connexion,
-      "INSERT INTO reviews SET ?",
+      "INSERT INTO Reviews SET ?",
       {
         text: body.review,
       }

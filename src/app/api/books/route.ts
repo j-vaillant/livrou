@@ -8,7 +8,7 @@ export async function GET() {
 
   const books = await executeQuery<Book[], undefined>(
     connexion,
-    "select * from books"
+    "select * from Books"
   );
 
   connexion.end();

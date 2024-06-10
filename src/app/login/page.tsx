@@ -1,7 +1,7 @@
 import LoginForm from "./LoginForm";
 
 const getToken = async (): Promise<{ csrfToken: string }> => {
-  const req = await fetch(`${process.env.API_BASE}/api/auth/csrf`);
+  const req = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/auth/csrf`);
   return await req.json();
 };
 
