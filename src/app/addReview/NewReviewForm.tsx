@@ -18,6 +18,8 @@ const NewReviewForm = () => {
     resolver: zodResolver(NewReviewFormSchema),
   });
 
+  console.log(process.env.NEXT_PUBLIC_TITI, "titi");
+
   const onSubmit: SubmitHandler<z.infer<typeof NewReviewFormSchema>> = async (
     values
   ) => {
