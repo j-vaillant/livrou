@@ -3,7 +3,6 @@
 import { executeQuery, createConnection } from "@/utils/mysql";
 import { z } from "zod";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 const NewBookSchema = z.object({
@@ -44,7 +43,7 @@ const insertBook = async (_prevState: unknown, formData: FormData) => {
       { title: data.title, summary: data.summary }
     );
 
-    revalidatePath("/");
+    revalidateTag("books");
     revalidateTag("/");
 
     connection.end();

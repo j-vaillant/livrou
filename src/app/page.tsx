@@ -1,11 +1,14 @@
 import BookList from "@/components/books/BookList";
-type BookRequest = {
+type BookResponse = {
   books: Book[];
 };
 
-const fetchBooks = async (): Promise<BookRequest> => {
+const fetchBooks = async (): Promise<BookResponse> => {
   const books = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/books`, {
     cache: "no-store",
+    next: {
+      tags: ["books"],
+    },
     headers: {
       "Content-Type": "application/json",
     },

@@ -3,25 +3,29 @@
 import { FC, useEffect } from "react";
 import { signInUser } from "../../actions/signInUser";
 import { useFormState } from "react-dom";
+import { useRouter } from "next/navigation";
+
 type Props = {
   csrfToken: string;
 };
 
 type FormState = {
   message?: string;
-  shouldRedirect?: boolean;
+  success?: boolean;
 };
 
 const initialState: FormState = {};
 
 const LoginForm: FC<Props> = ({ csrfToken }) => {
   const [state, formAction] = useFormState(signInUser, initialState);
+  const router = useRouter();
 
   useEffect(() => {
-    if (state.shouldRedirect) {
-      window.location.href = "/";
+    if (state.success) {
+      router.push("/");
     }
-  }, [state]);
+  }, [state.success, router]);
+
   return (
     <div className="flex flex-col gap-2">
       {state?.message && <span>{state.message}</span>}
