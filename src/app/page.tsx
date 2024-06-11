@@ -5,6 +5,7 @@ type BookRequest = {
 
 const fetchBooks = async (): Promise<BookRequest> => {
   const books = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/books`, {
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
     },

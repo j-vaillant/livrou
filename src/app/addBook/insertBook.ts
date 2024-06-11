@@ -4,6 +4,7 @@ import { executeQuery, createConnection } from "@/utils/mysql";
 import { z } from "zod";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 const NewBookSchema = z.object({
   title: z.string().min(1, { message: "ne peut être vide" }),
@@ -12,8 +13,6 @@ const NewBookSchema = z.object({
 
 const insertBook = async (_prevState: unknown, formData: FormData) => {
   const session = await auth();
-
-  console.log(session);
 
   if (!session) {
     return {
@@ -41,9 +40,12 @@ const insertBook = async (_prevState: unknown, formData: FormData) => {
 
     await executeQuery<Promise<void>, { title: string; summary: string }>(
       connection,
-      "INSERT INTO books SET ?",
+      "INSERT INTO Books SET ?",
       { title: data.title, summary: data.summary }
     );
+
+    revalidatePath("/");
+    revalidateTag("/");
 
     connection.end();
 
