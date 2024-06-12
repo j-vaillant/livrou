@@ -14,7 +14,7 @@ const getReviewsByBook = async (bookId: string) => {
       "select R.text, Books.title, R.id, Users.name from Reviews R JOIN Books ON R.book_id = Books.id JOIN Users ON Users.id = R.user_id WHERE R.book_id = ?",
       [bookId]
     );
-    await connection.end();
+    await connection.quit();
 
     return data;
   } catch (e) {

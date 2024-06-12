@@ -46,7 +46,7 @@ const insertBook = async (_prevState: unknown, formData: FormData) => {
     revalidateTag("books");
     revalidateTag("/");
 
-    connection.end();
+    await connection.quit();
 
     return {
       message: "Livre créé avec succès",

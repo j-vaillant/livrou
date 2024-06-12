@@ -1,17 +1,19 @@
 import { FC } from "react";
 import { ReviewWithName } from "./getReviewsByBook";
+import Link from "next/link";
 
 type Props = {
   reviews?: ReviewWithName[];
 };
 
 const ReviewList: FC<Props> = ({ reviews }) => {
-  const bookTitle = Array.isArray(reviews) && reviews[0].title;
+  const book = reviews ? reviews[0] : [];
+  const { title, id } = book as ReviewWithName;
 
   return (
     <div>
       <span className="font-bold inline-block w-full text-center">
-        Review du livre {bookTitle}
+        Review du livre {title}
       </span>
       {reviews?.map(({ text, id, name }) => {
         return (
@@ -21,6 +23,9 @@ const ReviewList: FC<Props> = ({ reviews }) => {
           </div>
         );
       })}
+      <Link className="text-blue-800" href={`/addReview/${id}`}>
+        Proposer une nouvelle review
+      </Link>
     </div>
   );
 };

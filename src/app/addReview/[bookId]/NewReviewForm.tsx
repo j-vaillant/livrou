@@ -3,7 +3,9 @@
 import { toast } from "@/components/toast/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useParams } from "next/navigation";
 import { z } from "zod";
+import { useCurrentSession } from "@/app/SessionManager";
 
 const NewReviewFormSchema = z.object({
   review: z.string().min(1, { message: "ne peut être vide" }),
@@ -18,6 +20,9 @@ const NewReviewForm = () => {
     resolver: zodResolver(NewReviewFormSchema),
   });
 
+  const params = useParams();
+  const session = useCurrentSession();
+
   const onSubmit: SubmitHandler<z.infer<typeof NewReviewFormSchema>> = async (
     values
   ) => {
@@ -26,7 +31,11 @@ const NewReviewForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        ...values,
+        bookId: params.bookId,
+        userId: session.data?.user?.id,
+      }),
     });
 
     const data = await req.json();

@@ -17,11 +17,6 @@ const NavigationMenu = () => {
         </Link>
       </li>
       <li>
-        <Link href="/addReview" className="flex">
-          <Pencil className="mr-2" /> Déposer une critique
-        </Link>
-      </li>
-      <li>
         <Link href="/addBook" className="flex">
           Déposer un livre
         </Link>

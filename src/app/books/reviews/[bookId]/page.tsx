@@ -11,7 +11,7 @@ type Props = {
 const BooksReviews: FC<Props> = async ({ params }) => {
   const reviews = await getReviewsByBook(params.bookId);
 
-  return <ReviewList reviews={reviews} />
+  return <ReviewList reviews={reviews} />;
 };
 
 export default BooksReviews;

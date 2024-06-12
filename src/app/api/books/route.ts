@@ -11,7 +11,7 @@ export async function GET() {
     "select * from Books"
   );
 
-  connexion.end();
+  await connexion.quit();
 
   return NextResponse.json({ books }, { status: 200 });
 }
