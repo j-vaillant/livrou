@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { BookOpen, Pencil, KeyRound } from "lucide-react";
-import { signOutUser } from "../actions/signOutUser";
 import { useRouter } from "next/navigation";
 import { useCurrentSession } from "@/app/SessionManager";
 
