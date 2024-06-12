@@ -1,27 +1,25 @@
-import mysql, { Connection } from "mysql";
+import mysql from "serverless-mysql";
 
 export const createConnection = async () => {
-  const connection = mysql.createConnection({
-    host: "localhost",
-    user: "apprenant",
-    password: "apprenant",
-    database: "livrou",
+  const connection = await mysql({
+    library: require("mysql2"),
+    config: {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PWD,
+      database: process.env.DB_NAME,
+      port: parseInt(process.env.DB_PORT ?? "3306", 10),
+    },
   });
-
   return connection;
 };
 
-export const executeQuery = async <T, S>(
-  connection: Connection,
-  sql: string, 
-  data?: S
+export const executeQuery = async <T, V>(
+  connection: any,
+  sql: string,
+  data?: V
 ): Promise<T> => {
-  return new Promise((resolve, reject) => {
-    connection.query(sql, data, (errors, results) => {
-      if (errors) {
-        return reject(errors);
-      }
-      return resolve(results);
-    });
-  });
+  const queryResult = (await connection.query(sql, data)) as T;
+
+  return queryResult;
 };
