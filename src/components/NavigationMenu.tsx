@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { BookOpen, Pencil, KeyRound } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useCurrentSession } from "@/app/SessionManager";
+import { signOut, useSession } from "next-auth/react";
 
 const NavigationMenu = () => {
-  const session = useCurrentSession();
-  const router = useRouter();
+  const { data: session, status } = useSession();
 
   return (
     <menu className="p-4 flex bg-slate-600 text-slate-300 justify-between">
@@ -22,18 +20,18 @@ const NavigationMenu = () => {
         </Link>
       </li>
       <li>
-        {session.status === "unauthenticated" && (
+        {status === "unauthenticated" && (
           <Link href="/login" className="flex">
             <KeyRound className="mr-2" />
             Se connecter
           </Link>
         )}
-        {session.status === "authenticated" && (
+        {status === "authenticated" && (
           <div className="flex">
-            <div className="font-bold mr-2">{session.data?.user?.name}</div>
+            <div className="font-bold mr-2">{session.user?.name}</div>
             <button
-              onClick={() => {
-                session.logOut();
+              onClick={async () => {
+                await signOut();
               }}
             >
               Se déconnecter

@@ -3,7 +3,6 @@
 import { FC, useEffect } from "react";
 import { signInUser } from "../../actions/signInUser";
 import { useFormState } from "react-dom";
-import { useRouter } from "next/navigation";
 
 type Props = {
   csrfToken: string;
@@ -18,13 +17,12 @@ const initialState: FormState = {};
 
 const LoginForm: FC<Props> = ({ csrfToken }) => {
   const [state, formAction] = useFormState(signInUser, initialState);
-  const router = useRouter();
 
   useEffect(() => {
     if (state.success) {
-      router.push("/");
+      window.location.href = "/";
     }
-  }, [state.success, router]);
+  }, [state.success]);
 
   return (
     <div className="flex flex-col gap-2">

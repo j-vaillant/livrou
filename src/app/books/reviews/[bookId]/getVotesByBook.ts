@@ -1,7 +1,7 @@
 import { createConnection, executeQuery } from "@/utils/mysql";
 
 export type Vote = {
-  who: string;
+  who: number;
   voted_review: string;
 };
 

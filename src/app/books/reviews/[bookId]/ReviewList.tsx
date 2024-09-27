@@ -1,14 +1,10 @@
 "use client";
 
-import {
-  DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS,
-  FC,
-  useState,
-} from "react";
+import { FC, useState } from "react";
 import { ReviewWithName } from "./getReviewsByBook";
 import Link from "next/link";
 import voteForReview from "./voteForReview";
-import { useCurrentSession } from "@/app/SessionManager";
+import { useSession } from "next-auth/react";
 
 type Props = {
   reviews?: ReviewWithName[];
@@ -19,7 +15,7 @@ type Props = {
 const ReviewList: FC<Props> = ({ reviews = [], bookId, voteMap }) => {
   const book = reviews[0];
   const [localVoteMap, setLocalVoteMap] = useState(voteMap);
-  const session = useCurrentSession();
+  const session = useSession();
 
   const handleVote = async (reviewId: string) => {
     const res = await voteForReview(reviewId);

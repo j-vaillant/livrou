@@ -24,7 +24,7 @@ const BooksReviews: FC<Props> = async ({ params }) => {
       }
 
       return acc;
-    }, {} as Record<string, string[]>) ?? {};
+    }, {} as Record<string, number[]>) ?? {};
 
   console.log(map, votes, "?");
 
