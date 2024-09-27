@@ -4,16 +4,14 @@ import Link from "next/link";
 
 type Props = {
   reviews?: ReviewWithName[];
+  book?: Book;
 };
 
-const ReviewList: FC<Props> = ({ reviews }) => {
-  const book = reviews ? reviews[0] : [];
-  const { title, id } = book as ReviewWithName;
-
+const ReviewList: FC<Props> = ({ reviews, book }) => {
   return (
     <div>
       <span className="font-bold inline-block w-full text-center">
-        Review du livre {title}
+        Review du livre {book?.title}
       </span>
       {reviews?.map(({ text, id, name }) => {
         return (
@@ -23,7 +21,7 @@ const ReviewList: FC<Props> = ({ reviews }) => {
           </div>
         );
       })}
-      <Link className="text-blue-800" href={`/addReview/${id}`}>
+      <Link className="text-blue-800" href={`/addReview/${book?.id}`}>
         Proposer une nouvelle review
       </Link>
     </div>
