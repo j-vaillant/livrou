@@ -5,7 +5,7 @@ type BookRequest = {
 };
 
 const fetchBooks = async (): Promise<BookRequest> => {
-  const books = await fetch(`${process.env.API_BASE}api/books`, {
+  const books = await fetch(`${process.env.API_BASE}/api/books`, {
     headers: {
       "Content-Type": "application/json",
     },
