@@ -1,5 +1,6 @@
 import { FC } from "react";
 import getReviewsByBook from "./getReviewsByBook";
+import getBookById from "./getBookById";
 import ReviewList from "./ReviewList";
 
 type Props = {
@@ -10,8 +11,15 @@ type Props = {
 
 const BooksReviews: FC<Props> = async ({ params }) => {
   const reviews = await getReviewsByBook(params.bookId);
+  const book = await getBookById(params.bookId);
 
-  return <ReviewList reviews={reviews} />
+  console.log(book, "BOOK?");
+
+  if (!book) {
+    return null;
+  }
+
+  return <ReviewList book={book[0]} reviews={reviews} />;
 };
 
 export default BooksReviews;

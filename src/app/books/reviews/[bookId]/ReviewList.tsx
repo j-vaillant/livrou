@@ -1,17 +1,16 @@
 import { FC } from "react";
-import { ReviewWithName } from "./getReviewsByBook";
+import { ReviewWithName } from "./getBookById";
 
 type Props = {
   reviews?: ReviewWithName[];
+  book?: Book;
 };
 
-const ReviewList: FC<Props> = ({ reviews }) => {
-  const bookTitle = Array.isArray(reviews) && reviews[0].title;
-
+const ReviewList: FC<Props> = ({ reviews, book }) => {
   return (
     <div>
       <span className="font-bold inline-block w-full text-center">
-        Review du livre {bookTitle}
+        Review du livre {book?.title}
       </span>
       {reviews?.map(({ text, id, name }) => {
         return (
